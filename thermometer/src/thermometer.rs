@@ -1,6 +1,6 @@
 // use std::net::UdpSocket;
-use tokio::net::UdpSocket;
 use std::time::Instant;
+use tokio::net::UdpSocket;
 
 pub struct Thermometer {
     socket: UdpSocket,
@@ -34,7 +34,8 @@ impl Thermometer {
 
     pub async fn poll(&self) {
         if self
-            .send_measure(&format!("{:.1}", self.measure_celsium().await)).await
+            .send_measure(&format!("{:.1}", self.measure_celsium().await))
+            .await
             .is_err()
         {
             println!("Unable to send measured temperature...")
