@@ -2,11 +2,12 @@ mod thermometer;
 
 use thermometer::Thermometer;
 
-fn main() {
-    if let Some(thermometer) = Thermometer::new("127.0.0.1:8601") {
+#[tokio::main]
+async fn main() {
+    if let Some(thermometer) = Thermometer::new("127.0.0.1:8601").await {
         loop {
-            thermometer.poll();
-            std::thread::sleep(std::time::Duration::from_secs(1));
+            thermometer.poll().await;
+            tokio::time::sleep(std::time::Duration::from_secs(1)).await;
         }
     }
 }
